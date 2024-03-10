@@ -73,4 +73,39 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ plan });
 }
 
+export async function DELETE(request: NextRequest) {
+    const cookieStore = cookies()
+    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return NextResponse.json({
+            error: { message: "User not signed in" },
+            plans: []
+        }, { status: 401 });
+    }
+
+    const id = (await request.json())?.id;
+
+    if (!id) {
+        return NextResponse.json({
+            error: { message: "No `id` found." },
+            plans: []
+        }, { status: 401 });
+    }
+
+    let { error } = await supabase
+        .from("plans")
+        .delete()
+        .eq('id', id)
+        .eq('user_id', user.id);
+
+    if (error) {
+        return NextResponse.json({ error }, { status: 400 });
+    }
+
+    return NextResponse.json({ deleted: true });
+}
+
 export default GET;

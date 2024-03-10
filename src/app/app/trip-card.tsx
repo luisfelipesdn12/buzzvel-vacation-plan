@@ -8,14 +8,43 @@ import {
 } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "@/components/ui/use-toast"
 import { Plan } from "@/lib/database.types"
 import { cn } from "@/lib/utils"
+import axios from "axios"
 import { format } from "date-fns"
-import { Calendar as CalendarIcon, EllipsisIcon, EyeIcon, MapPinIcon, PencilIcon, TrashIcon, UsersIcon } from "lucide-react"
+import { Calendar as CalendarIcon, EllipsisIcon, EyeIcon, LoaderCircle, MapPinIcon, PencilIcon, TrashIcon, UsersIcon } from "lucide-react"
+import { useCallback, useState } from "react"
 
 export default function TripCard({ plan }: { plan: Plan }) {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [deleted, setDeleted] = useState<boolean>(false);
+
+    const handleDelete = useCallback(async () => {
+        setLoading(true);
+        await axios.delete("/api/plans/", {
+            data: { id: plan.id }
+        })
+            .then(() => {
+                toast({
+                    title: "Trip deleted!",
+                    variant: "default",
+                });
+                setDeleted(true);
+            })
+            .catch(e => {
+                console.error(e);
+                toast({
+                    title: "Error deleting trip!",
+                    variant: "destructive",
+                    description: e?.response?.data?.error?.message,
+                });
+            })
+            .finally(() => setLoading(false));
+    }, [plan.id]);
+
     return (
-        <Card className="text-left w-96">
+        <Card className={`text-left w-96 ${deleted ? "hidden" : ""}`}>
             <CardHeader className="relative">
                 <CardTitle>{plan.title}</CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
@@ -35,8 +64,12 @@ export default function TripCard({ plan }: { plan: Plan }) {
                             <span>Edit</span>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive">
-                            <TrashIcon className="mr-2 h-4 w-4" />
+                        <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
+                            {loading ? (
+                                <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+                            ) : (
+                                <TrashIcon className="mr-2 h-4 w-4" />
+                            )}
                             <span>Delete</span>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
