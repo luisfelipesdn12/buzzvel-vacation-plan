@@ -1,27 +1,23 @@
-import { LoaderCircle, TrashIcon } from "lucide-react"
+import { LoaderCircle, TrashIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Plan } from "@/lib/database.types";
-import { useCallback, useState } from "react";
-import axios from "axios";
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from "@/components/ui/drawer";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { toast } from "@/components/ui/use-toast";
+import axios from "axios";
+import { useCallback, useState } from "react";
+import { TripCardActionProps } from "./trip-card";
 
-export function DeleteTrip({ open, plan, setOpen }: {
-    plan: Plan;
-    open: boolean;
-    setOpen: (v: boolean) => void;
-}) {
+export function DeleteTrip({ open, plan, setOpen, afterSubmit }: TripCardActionProps) {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleDelete = useCallback(async () => {
@@ -35,6 +31,7 @@ export function DeleteTrip({ open, plan, setOpen }: {
                     variant: "default",
                 });
                 setOpen(false);
+                afterSubmit && afterSubmit();
             })
             .catch(e => {
                 console.error(e);
@@ -45,16 +42,37 @@ export function DeleteTrip({ open, plan, setOpen }: {
                 });
             })
             .finally(() => setLoading(false));
-    }, [plan.id, setOpen]);
+    }, [afterSubmit, plan.id, setOpen]);
 
     return (
-        <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
-            {loading ? (
-                <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-                <TrashIcon className="mr-2 h-4 w-4" />
-            )}
-            <span>Delete</span>
-        </DropdownMenuItem>
+        <Drawer open={open} onOpenChange={setOpen}>
+            <DrawerTrigger asChild>
+                <DropdownMenuItem className="text-destructive" onSelect={e => e.preventDefault()}>
+                    <TrashIcon className="mr-2 h-4 w-4" />
+                    <span>Delete</span>
+                </DropdownMenuItem>
+            </DrawerTrigger>
+            <DrawerContent>
+                <DrawerHeader>
+                    <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                    <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                </DrawerHeader>
+                <DrawerFooter>
+                    <Button
+                        onClick={handleDelete}
+                        variant={"destructive"}
+                        className="w-full font-semibold"
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <LoaderCircle className="animate-spin" />
+                        ) : "Delete"}
+                    </Button>
+                    <DrawerClose>
+                        <Button className="w-full" variant={"secondary"}>Cancel</Button>
+                    </DrawerClose>
+                </DrawerFooter>
+            </DrawerContent>
+        </Drawer>
     );
 }

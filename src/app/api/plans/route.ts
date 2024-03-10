@@ -1,4 +1,4 @@
-import { Database, Participant, Plan, PlanInsert } from '@/lib/database.types';
+import { Database, Participant, Plan, PlanInsert, PlanUpdate } from '@/lib/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
@@ -64,6 +64,47 @@ export async function POST(request: NextRequest) {
     let { data: plan, error } = await supabase
         .from("plans")
         .insert(newPlan)
+        .select();
+
+    if (error) {
+        return NextResponse.json({ error }, { status: 400 });
+    }
+
+    return NextResponse.json({ plan });
+}
+
+export async function PUT(request: NextRequest) {
+    const cookieStore = cookies()
+    const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return NextResponse.json({
+            error: { message: "User not signed in" },
+            plans: []
+        }, { status: 401 });
+    }
+
+    const body: PlanUpdate = await request.json();
+
+    if (!body.id) {
+        return NextResponse.json({
+            error: { message: "No `id` found." },
+            plans: []
+        }, { status: 401 });
+    }
+
+    let { data: plan, error } = await supabase
+        .from("plans")
+        .update({
+            title: body.title,
+            description: body.description,
+            date: body.date,
+            location: body.location,
+        })
+        .eq('id', body.id)
+        .eq('user_id', user.id)
         .select();
 
     if (error) {

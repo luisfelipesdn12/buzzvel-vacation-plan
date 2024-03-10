@@ -1,4 +1,4 @@
-import { CalendarIcon, LoaderCircle, MapPinIcon, PlusCircleIcon } from "lucide-react"
+import { CalendarIcon, EditIcon, LoaderCircle, MapPinIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -12,6 +12,7 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -22,9 +23,10 @@ import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { format } from "date-fns"
+import { useCallback } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { useCallback, useEffect, useState } from "react"
+import { TripCardActionProps } from "./trip-card"
 
 const FormSchema = z.object({
     title: z.string().max(20),
@@ -37,48 +39,45 @@ const FormSchema = z.object({
     })).optional(),
 });
 
-export function AddTrip({open, setOpen}: {
-    open: boolean;
-    setOpen: (v: boolean) => void;
-}) {
+export function EditTrip({ open, plan, setOpen, afterSubmit }: TripCardActionProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
-        defaultValues: {},
+        defaultValues: { ...plan, date: new Date(plan.date) },
     });
 
     const handleSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
-        await axios.post("/api/plans", data)
+        await axios.put("/api/plans", { ...plan, ...data })
             .then(() => {
                 toast({
-                    title: "Trip created!",
+                    title: "Trip updated!",
                     variant: "default",
                 });
                 setOpen(false);
+                afterSubmit && afterSubmit();
             })
             .catch(e => {
                 console.error(e);
                 toast({
-                    title: "Error creating trip!",
+                    title: "Error updating trip!",
                     variant: "destructive",
                     description: e?.response?.data?.error?.message,
                 })
             });
-    }, [setOpen]);
-
-    useEffect(() => form.reset(), [form, open]);
+    }, [afterSubmit, setOpen]);
 
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button variant="outline">
-                    <PlusCircleIcon className="mr-2" /> Add new trip plan
-                </Button>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    <EditIcon className="mr-2 h-4 w-4" />
+                    <span>Edit</span>
+                </DropdownMenuItem>
             </DrawerTrigger>
             <DrawerContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)} className="mx-auto w-full max-w-sm">
                         <DrawerHeader>
-                            <DrawerTitle>Create a new plan</DrawerTitle>
+                            <DrawerTitle>Edit your plan</DrawerTitle>
                             <DrawerDescription>Insert the informations of your planned trip.</DrawerDescription>
                         </DrawerHeader>
                         <ScrollArea className="p-4 pt-0 flex flex-col pb-0 max-h-80">

@@ -8,40 +8,40 @@ import {
 } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Skeleton } from "@/components/ui/skeleton"
-import { toast } from "@/components/ui/use-toast"
 import { Plan } from "@/lib/database.types"
 import { cn } from "@/lib/utils"
-import axios from "axios"
 import { format } from "date-fns"
-import { Calendar as CalendarIcon, EllipsisIcon, EyeIcon, LoaderCircle, MapPinIcon, PencilIcon, TrashIcon, UsersIcon } from "lucide-react"
-import { useCallback, useState } from "react"
+import { Calendar as CalendarIcon, EllipsisIcon, FileDownIcon, MapPinIcon, UsersIcon } from "lucide-react"
+import { useMemo, useState } from "react"
+import { DeleteTrip } from "./delete-trip"
+import { EditTrip } from "./edit-trip"
 
-export default function TripCard({ plan }: { plan: Plan }) {
-    const [loading, setLoading] = useState<boolean>(false);
+export interface TripCardActionProps {
+    plan: Plan;
+    open: boolean;
+    setOpen: (v: boolean) => void;
+    afterSubmit?: (data?: Plan) => void;
+}
+
+export default function TripCard({ plan: initialPlan, onAfterAction }: {
+    plan: Plan,
+    onAfterAction: () => void,
+}) {
     const [deleted, setDeleted] = useState<boolean>(false);
+    const [openEdit, setOpenEdit] = useState<boolean>(false);
+    const [openDelete, setOpenDelete] = useState<boolean>(false);
+    const [updatedPlan, setUpdatedPlan] = useState<Plan>();
 
-    const handleDelete = useCallback(async () => {
-        setLoading(true);
-        await axios.delete("/api/plans/", {
-            data: { id: plan.id }
-        })
-            .then(() => {
-                toast({
-                    title: "Trip deleted!",
-                    variant: "default",
-                });
-                setDeleted(true);
-            })
-            .catch(e => {
-                console.error(e);
-                toast({
-                    title: "Error deleting trip!",
-                    variant: "destructive",
-                    description: e?.response?.data?.error?.message,
-                });
-            })
-            .finally(() => setLoading(false));
-    }, [plan.id]);
+    const onDeleted = () => {
+        setDeleted(true);
+        onAfterAction();
+    };
+    const onEdit = (data?: Plan) => {
+        setUpdatedPlan(data);
+        onAfterAction();
+    };
+
+    const plan = useMemo(() => updatedPlan || initialPlan, [initialPlan, updatedPlan]);
 
     return (
         <Card className={`text-left w-96 ${deleted ? "hidden" : ""}`}>
@@ -54,24 +54,24 @@ export default function TripCard({ plan }: { plan: Plan }) {
                             <EllipsisIcon />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent>
+                    <DropdownMenuContent hideWhenDetached={true}>
+                        <EditTrip
+                            plan={plan} open={openEdit}
+                            setOpen={setOpenEdit} afterSubmit={onEdit}
+                        />
                         <DropdownMenuItem>
-                            <EyeIcon className="mr-2 h-4 w-4" />
-                            <span>View more</span>
+                            <UsersIcon className="mr-2 h-4 w-4" />
+                            <span>Add participants</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                            <PencilIcon className="mr-2 h-4 w-4" />
-                            <span>Edit</span>
+                            <FileDownIcon className="mr-2 h-4 w-4" />
+                            <span>Download PDF</span>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
-                            {loading ? (
-                                <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-                            ) : (
-                                <TrashIcon className="mr-2 h-4 w-4" />
-                            )}
-                            <span>Delete</span>
-                        </DropdownMenuItem>
+                        <DeleteTrip
+                            plan={plan} open={openDelete}
+                            setOpen={setOpenDelete} afterSubmit={onDeleted}
+                        />
                     </DropdownMenuContent>
                 </DropdownMenu>
             </CardHeader>

@@ -10,12 +10,13 @@ export default function Trips(props: SessionProviderPageProps) {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [openAddTrip, setOpenAddTrip] = useState<boolean>(false);
 
+  const fetchTrips = async () => axios.get("/api/plans")
+    .then(res => res.data.plans)
+    .then(setPlans)
+    .finally(() => setLoading(false));
+
   useEffect(() => {
-    const fn = async () => axios.get("/api/plans")
-      .then(res => res.data.plans)
-      .then(setPlans)
-      .finally(() => setLoading(false));
-    fn();
+    fetchTrips();
   }, [openAddTrip]);
 
   return (
@@ -35,7 +36,7 @@ export default function Trips(props: SessionProviderPageProps) {
         {loading ? Array.from(Array(3).keys()).map((key) => (
           <TripCardSkeleton key={key} />
         )) : plans.length > 0 ? plans.map((plan, key) => (
-          <TripCard key={key} plan={plan} />
+          <TripCard key={key} plan={plan} onAfterAction={() => fetchTrips()} />
         )) : (
           <p className="text-muted-foreground text-right">
             There are no trips yet...

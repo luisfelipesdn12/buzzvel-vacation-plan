@@ -25,7 +25,7 @@ export interface Database {
                     updated_at?: Date
                 }
                 Update: {
-                    id?: string
+                    id: string
                     user_id?: string
                     title?: string
                     description?: string
@@ -71,4 +71,5 @@ export interface Database {
 
 export type Plan = Database["public"]["Tables"]["plans"]["Row"];
 export type PlanInsert = Database["public"]["Tables"]["plans"]["Insert"];
+export type PlanUpdate = Database["public"]["Tables"]["plans"]["Insert"];
 export type Participant = Database["public"]["Tables"]["participants"]["Row"];
