@@ -10,16 +10,23 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { ScrollArea } from "./ui/scroll-area";
 
+interface Link {
+    label: string;
+    pathname: string;
+    target?: string;
+}
+
+const links: Link[] = [
+    {
+        label: "Author",
+        pathname: "https://luisf.dev",
+        target: "_blank",
+    },
+];
+
 export default function Navbar() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false);
-
-    const links = [
-        {
-            label: "Author",
-            pathname: "https://luisf.dev",
-        },
-    ];
 
     return (
         <header className="sticky top-0 py-1 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -35,6 +42,7 @@ export default function Navbar() {
                             <Link
                                 key={key}
                                 href={link.pathname}
+                                target={link.target}
                                 className={cn(
                                     "transition-colors hover:text-foreground/80",
                                     pathname === link.pathname ? "text-foreground" : "text-foreground/60"
@@ -97,6 +105,7 @@ export default function Navbar() {
                                     <MobileLink
                                         key={key}
                                         href={link.pathname}
+                                        target={link.target}
                                         onOpenChange={setOpen}
                                     >
                                         {link.label}
@@ -107,23 +116,23 @@ export default function Navbar() {
                     </SheetContent>
                 </Sheet>
                 <div className="flex flex-1 gap-1 items-center justify-between space-x-2 md:justify-end">
-                    <div className="w-full flex-1 md:w-auto md:flex-none">
-                        <Button>Login</Button>
-                    </div>
                     <nav className="flex items-center">
                         <ModeToggle />
                     </nav>
+                    <div className="w-full flex-1 md:w-auto md:flex-none">
+                        <Button>Login</Button>
+                    </div>
                 </div>
             </div>
         </header>
     )
 }
 
-
 interface MobileLinkProps extends LinkProps {
     onOpenChange?: (open: boolean) => void
     children: React.ReactNode
     className?: string
+    target?: string
 }
 
 function MobileLink({
