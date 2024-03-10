@@ -70,4 +70,5 @@ export interface Database {
 }
 
 export type Plan = Database["public"]["Tables"]["plans"]["Row"];
+export type PlanInsert = Database["public"]["Tables"]["plans"]["Insert"];
 export type Participant = Database["public"]["Tables"]["participants"]["Row"];

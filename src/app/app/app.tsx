@@ -4,6 +4,7 @@ import { SessionProviderPageProps } from "@/components/SessionProvider";
 import Navbar from "@/components/navbar";
 import { useMemo } from "react";
 import Trips from "./trips";
+import { Separator } from "@/components/ui/separator";
 
 export default function App(props: SessionProviderPageProps) {
     const salute = useMemo(() =>
@@ -28,6 +29,7 @@ export default function App(props: SessionProviderPageProps) {
                         </p>
                     </p>
                 </header>
+                <Separator className="my-4 opacity-0" />
                 <Trips {...props} />
             </main>
         </>
