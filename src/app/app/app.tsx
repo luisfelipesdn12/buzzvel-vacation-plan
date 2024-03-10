@@ -18,13 +18,13 @@ export default function App(props: SessionProviderPageProps) {
         <>
             <Navbar {...props} />
             <main className="flex flex-col p-16 py-12 items-start justify-center gap-1 text-center">
-                <header className="flex items-end justify-center w-full gap-1 text-center">
+                <header className="flex flex-col items-center md:flex-row md:items-end justify-center w-full gap-4 md:gap-1 text-center">
                     <Camping className="w-80 h-40" />
-                    <div className="flex flex-col items-end justify-center w-full gap-1 text-center">
+                    <div className="flex flex-col items-center md:items-end justify-center w-full gap-1 text-center">
                         <h1 className="text-3xl font-bold">
                             {salute}
                         </h1>
-                        <p className="text-muted-foreground text-right">
+                        <p className="text-muted-foreground text-center md:text-right">
                             {`"We could vacay, there's places to go"`}
                             <br />
                             <p className="text-sm">

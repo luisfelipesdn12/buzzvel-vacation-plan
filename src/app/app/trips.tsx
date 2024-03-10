@@ -21,7 +21,7 @@ export default function Trips(props: SessionProviderPageProps) {
 
   return (
     <section className="flex flex-col items-start justify-center w-full gap-5 text-center">
-      <div className="flex items-start justify-center w-full gap-1">
+      <div className="flex flex-col md:flex-row items-start justify-center w-full gap-1">
         <div className="flex flex-col items-start justify-center w-full gap-1">
           <h1 className="text-4xl font-bold">
             Your trips!

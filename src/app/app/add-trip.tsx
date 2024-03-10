@@ -70,7 +70,7 @@ export function AddTrip({open, setOpen}: {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button variant="outline">
+                <Button variant="outline" className="w-full mt-3 md:w-auto">
                     <PlusCircleIcon className="mr-2" /> Add new trip plan
                 </Button>
             </DrawerTrigger>
