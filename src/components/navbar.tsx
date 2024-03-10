@@ -16,6 +16,7 @@ import { LogOut, UserRound } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database.types";
+import { SessionProviderPageProps } from "./SessionProvider";
 
 interface Link {
     label: string;
@@ -23,7 +24,7 @@ interface Link {
     target?: string;
 }
 
-export default function Navbar({ session }: { session?: Session | null }) {
+export default function Navbar({ session, gravatar }: SessionProviderPageProps) {
     const pathname = usePathname();
     const router = useRouter();
     const [open, setOpen] = useState(false);
@@ -53,6 +54,8 @@ export default function Navbar({ session }: { session?: Session | null }) {
         await supabase.auth.signOut();
         router.refresh();
     }
+
+    console.log({gravatar})
 
     return (
         <header className="sticky top-0 py-1 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -150,10 +153,7 @@ export default function Navbar({ session }: { session?: Session | null }) {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Avatar className="cursor-pointer">
-                                        <AvatarImage src={session.user.email && `https://gravatar.com/avatar/${createHash("sha256")
-                                                .update(session.user.email?.toLowerCase() || "")
-                                                .digest("hex")
-                                            }`} />
+                                        <AvatarImage src={gravatar?.thumbnailUrl} />
                                         <AvatarFallback>
                                             <UserRound />
                                         </AvatarFallback>
@@ -161,7 +161,7 @@ export default function Navbar({ session }: { session?: Session | null }) {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className="w-56 mr-10 mt-1">
                                     <DropdownMenuLabel className="pb-0">
-                                        Logged as
+                                        Logged as {gravatar?.displayName}
                                     </DropdownMenuLabel>
                                     <DropdownMenuLabel className="pt-1 text-xs font-normal text-muted-foreground">
                                         {session.user.email}

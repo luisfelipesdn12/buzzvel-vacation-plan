@@ -1,6 +1,6 @@
 import App from "./app"
 
-import SessionProvider from "@/components/RestrictedPage"
+import SessionProvider from "@/components/SessionProvider"
 
 const Page = () => <SessionProvider page={App} redirectIfNotSession="/" />;
 

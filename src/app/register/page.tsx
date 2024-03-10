@@ -1,4 +1,4 @@
-import SessionProvider from "@/components/RestrictedPage"
+import SessionProvider from "@/components/SessionProvider"
 import RegisterForm from "./form";
 
 const Page = () => <SessionProvider page={RegisterForm} redirectIfSession="/app" />;

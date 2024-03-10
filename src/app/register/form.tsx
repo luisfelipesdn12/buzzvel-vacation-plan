@@ -10,7 +10,7 @@ import type { Database } from "@/lib/database.types"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { toast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { RectangleEllipsis } from "lucide-react"
+import { LoaderCircle, RectangleEllipsis } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Navbar from "@/components/navbar"
@@ -105,7 +105,16 @@ export default function RegisterForm() {
                                 </FormItem>
                             )}
                         />
-                        <Button size={"lg"} className="w-full font-semibold" type="submit">Sign up</Button>
+                        <Button
+                            size={"lg"}
+                            type="submit"
+                            className="w-full font-semibold"
+                            disabled={form.formState.isSubmitting}
+                        >
+                            {form.formState.isSubmitting ? (
+                                <LoaderCircle className="animate-spin" />
+                            ) : "Sign up"}
+                        </Button>
                     </div>
                 </form>
             </Form>
