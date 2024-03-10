@@ -1,12 +1,10 @@
+import Pilot from "@/icons/Pilot";
 
 export default function Home() {
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-4">
-      <div className="w-[30rem] h-[15rem] mb-5" style={{
-        background: `url(/illustrations/pilot.svg)`,
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-      }} />
+    <main className="flex flex-col py-20 items-center justify-center gap-4 text-center">
+      <Pilot className="max-w-full" />
       <h1 className="text-5xl font-bold">
         Vacation Planner
       </h1>
