@@ -38,3 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Icons
 
 - Pilot: https://designs.ai/graphicmaker/illustrations/Duotone_Cartoon_Set/85-pilot
+- Camping: https://designs.ai/graphicmaker/illustrations/Duotone_Cartoon_Set/153-camping
