@@ -2,7 +2,6 @@
 
 import { SessionProviderPageProps } from "@/components/SessionProvider";
 import Navbar from "@/components/navbar";
-import { Separator } from "@/components/ui/separator";
 import { useMemo } from "react";
 import Trips from "./trips";
 

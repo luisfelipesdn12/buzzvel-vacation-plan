@@ -1,7 +1,7 @@
-import App from "./app"
+import App from "./app";
 
-import SessionProvider from "@/components/SessionProvider"
+import SessionProvider from "@/components/SessionProvider";
 
-const Page = () => <SessionProvider page={App} redirectIfNotSession="/" />;
+const Page = () => <SessionProvider page={App} redirectIfNotSession="/" />
 
 export default Page;

@@ -12,6 +12,7 @@ export interface Database {
                     location: string
                     created_at: Date
                     updated_at: Date
+                    participants: Database["public"]["Tables"]["participants"]["Row"][],
                 }
                 Insert: {
                     id?: string
@@ -67,3 +68,6 @@ export interface Database {
         }
     }
 }
+
+export type Plan = Database["public"]["Tables"]["plans"]["Row"];
+export type Participant = Database["public"]["Tables"]["participants"]["Row"];

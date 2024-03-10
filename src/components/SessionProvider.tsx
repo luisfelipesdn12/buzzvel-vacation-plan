@@ -1,4 +1,4 @@
-import { Session, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Session, SupabaseClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
 import type { Database } from '@/lib/database.types'
