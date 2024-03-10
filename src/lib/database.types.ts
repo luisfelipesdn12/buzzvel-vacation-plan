@@ -2,29 +2,56 @@
 export interface Database {
     public: {
         Tables: {
-            todos: {
+            plans: {
                 Row: {
-                    id: number
-                    inserted_at: string
-                    is_complete: boolean | null
-                    task: string | null
+                    id: string
                     user_id: string
+                    title: string
+                    description: string
+                    date: Date
+                    location: string
+                    created_at: Date
+                    updated_at: Date
                 }
                 Insert: {
-                    id?: number
-                    inserted_at?: string
-                    is_complete?: boolean | null
-                    task?: string | null
+                    id?: string
                     user_id: string
+                    title: string
+                    description: string
+                    date: Date
+                    location: string
+                    created_at?: Date
+                    updated_at?: Date
                 }
                 Update: {
-                    id?: number
-                    inserted_at?: string
-                    is_complete?: boolean | null
-                    task?: string | null
+                    id?: string
                     user_id?: string
+                    title?: string
+                    description?: string
+                    date?: Date
+                    location?: string
+                    created_at?: Date
+                    updated_at?: Date
                 }
-            }
+            },
+            participants: {
+                Row: {
+                    id: string
+                    plan_id: string
+                    name: string
+                    email: string
+                    created_at: Date
+                    updated_at: Date
+                },
+                Insert: {
+                    id: string
+                    plan_id: string
+                    name: string
+                    email: string
+                    created_at: Date
+                    updated_at: Date
+                },
+            },
         }
         Views: {
             [_ in never]: never

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useMemo, useState } from "react";
 import { ModeToggle } from "./ui/theme-toggle";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -54,8 +54,6 @@ export default function Navbar({ session, gravatar }: SessionProviderPageProps) 
         await supabase.auth.signOut();
         router.refresh();
     }
-
-    console.log({gravatar})
 
     return (
         <header className="sticky top-0 py-1 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -167,6 +165,12 @@ export default function Navbar({ session, gravatar }: SessionProviderPageProps) 
                                         {session.user.email}
                                     </DropdownMenuLabel>
                                     <DropdownMenuSeparator />
+                                    <Link href="https://gravatar.com/connect" target="_blank">
+                                        <DropdownMenuItem>
+                                            <UserRound className="mr-2 h-4 w-4" />
+                                            <span>My Profile</span>
+                                        </DropdownMenuItem>
+                                    </Link>
                                     <DropdownMenuItem onClick={handleSignOut}>
                                         <LogOut className="mr-2 h-4 w-4" />
                                         <span>Log out</span>
