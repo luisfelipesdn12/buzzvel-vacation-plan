@@ -1,16 +1,7 @@
-import Pilot from "@/icons/Pilot";
+import Home from "./home"
 
-export default function Home() {
+import SessionProvider from "@/components/RestrictedPage"
 
-  return (
-    <main className="flex flex-col py-20 items-center justify-center gap-4 text-center">
-      <Pilot className="max-w-full" />
-      <h1 className="text-5xl font-bold">
-        Vacation Planner
-      </h1>
-      <p className="text-muted-foreground">
-        The perfect planner for your deserved vacation. Set trips, manage dates and more!
-      </p>
-    </main>
-  );
-}
+const Page = () => <SessionProvider page={Home} />;
+
+export default Page;

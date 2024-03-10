@@ -3,12 +3,19 @@
 import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ModeToggle } from "./ui/theme-toggle";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { ScrollArea } from "./ui/scroll-area";
+import { Session } from "@supabase/supabase-js";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { createHash } from "crypto";
+import { LogOut, UserRound } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@/lib/database.types";
 
 interface Link {
     label: string;
@@ -16,17 +23,36 @@ interface Link {
     target?: string;
 }
 
-const links: Link[] = [
-    {
-        label: "Author",
-        pathname: "https://luisf.dev",
-        target: "_blank",
-    },
-];
-
-export default function Navbar() {
-    const pathname = usePathname()
+export default function Navbar({ session }: { session?: Session | null }) {
+    const pathname = usePathname();
+    const router = useRouter();
     const [open, setOpen] = useState(false);
+
+    const supabase = createClientComponentClient<Database>();
+
+    const links = useMemo<Link[]>(() => {
+        const links: Link[] = [
+            {
+                label: "Author",
+                pathname: "https://luisf.dev",
+                target: "_blank",
+            },
+        ];
+
+        if (session) {
+            links.unshift({
+                label: "App",
+                pathname: "/app",
+            });
+        }
+
+        return links;
+    }, [session]);
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+        router.refresh();
+    }
 
     return (
         <header className="sticky top-0 py-1 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -120,7 +146,39 @@ export default function Navbar() {
                         <ModeToggle />
                     </nav>
                     <div className="w-full flex-1 md:w-auto md:flex-none">
-                        <Button>Login</Button>
+                        {session ? (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Avatar className="cursor-pointer">
+                                        <AvatarImage src={session.user.email && `https://gravatar.com/avatar/${createHash("sha256")
+                                                .update(session.user.email?.toLowerCase() || "")
+                                                .digest("hex")
+                                            }`} />
+                                        <AvatarFallback>
+                                            <UserRound />
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56 mr-10 mt-1">
+                                    <DropdownMenuLabel className="pb-0">
+                                        Logged as
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuLabel className="pt-1 text-xs font-normal text-muted-foreground">
+                                        {session.user.email}
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem onClick={handleSignOut}>
+                                        <LogOut className="mr-2 h-4 w-4" />
+                                        <span>Log out</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        ) : (
+                            <>
+                                <Button className="mr-2" onClick={() => router.push("/register")} variant={"outline"}>Register</Button>
+                                <Button onClick={() => router.push("/login")}>Login</Button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
