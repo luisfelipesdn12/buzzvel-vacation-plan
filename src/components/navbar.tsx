@@ -1,22 +1,19 @@
 "use client"
 
-import { cn } from "@/lib/utils";
-import Link, { LinkProps } from "next/link";
-import { redirect, usePathname } from "next/navigation";
-import React, { useMemo, useState } from "react";
-import { ModeToggle } from "./ui/theme-toggle";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
-import { ScrollArea } from "./ui/scroll-area";
-import { Session } from "@supabase/supabase-js";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { createHash } from "crypto";
-import { LogOut, UserRound } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database.types";
+import { cn } from "@/lib/utils";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { LogOut, UserRound } from "lucide-react";
+import Link, { LinkProps } from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useMemo, useState } from "react";
 import { SessionProviderPageProps } from "./SessionProvider";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { ScrollArea } from "./ui/scroll-area";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { ModeToggle } from "./ui/theme-toggle";
 
 interface Link {
     label: string;

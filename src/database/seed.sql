@@ -1,6 +1,6 @@
 create table plans (
-    id varchar(255) primary key,
-    user_id varchar(255) not null,
+    id uuid primary key,
+    user_id uuid not null,
     title varchar(255) not null,
     description text,
     date DATE not null,
@@ -10,8 +10,8 @@ create table plans (
 );
 
 create table participants (
-    id varchar(255) primary key,
-    plan_id varchar(255) not null,
+    id uuid primary key,
+    plan_id uuid not null,
     name varchar(255) not null,
     email varchar(255) not null,
     created_at timestamp default current_timestamp,
