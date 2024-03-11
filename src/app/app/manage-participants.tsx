@@ -121,7 +121,7 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
                                     )}
                                 </Button>
                                 <DrawerClose asChild>
-                                    <Button variant="outline">Cancel</Button>
+                                    <Button variant="outline">Close</Button>
                                 </DrawerClose>
                             </DrawerFooter>
                         </form>

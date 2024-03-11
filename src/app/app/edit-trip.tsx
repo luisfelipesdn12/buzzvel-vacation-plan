@@ -179,7 +179,7 @@ export function EditTrip({ open, plan, setOpen, afterSubmit }: TripCardActionPro
                             >
                                 {form.formState.isSubmitting ? (
                                     <LoaderCircle className="animate-spin" />
-                                ) : "Create"}
+                                ) : "Update"}
                             </Button>
                             <DrawerClose asChild>
                                 <Button variant="outline">Cancel</Button>

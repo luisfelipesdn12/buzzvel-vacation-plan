@@ -16,5 +16,5 @@ create table participants (
     email varchar(255) not null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp,
-    constraint FK_participant_plan foreign key (plan_id) references plans (id)
+    constraint FK_participant_plan foreign key (plan_id) references plans (id) on delete cascade on update cascade
 );
