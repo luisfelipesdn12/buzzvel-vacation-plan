@@ -14,6 +14,7 @@ A web platform to manage holyday plans. Available now at [trip.luisf.dev](https:
 - 🔗 Custom domain configuration
 - 🛑 Careful errors handling with good UX
 - 🚪 Protected API using session to get personal data
+- 🔍 Testing in components and utils
 
 ## 🧑‍💻 Tech
 
