@@ -3,30 +3,7 @@ import { cookies } from 'next/headers'
 
 import type { Database } from '@/lib/database.types'
 import { redirect } from 'next/navigation'
-import { getGravatar } from '@/lib/utils'
-
-export interface Gravatar {
-    hash: string
-    requestHash: string
-    profileUrl: string
-    preferredUsername: string
-    thumbnailUrl: string
-    photos: {
-        value: string
-        type: string
-    }[];
-    last_profile_edit: string
-    displayName: string
-    name: {
-        givenName: string
-        familyName: string
-        formatted: string
-    }
-    urls: {
-        title: string
-        value: string
-    }[];
-}
+import { Gravatar, getGravatar } from '@/lib/utils'
 
 export type SessionProviderPageProps = {
     session?: Session | null;

@@ -32,7 +32,7 @@ export default function Trips(props: SessionProviderPageProps) {
         </div>
         <AddTrip open={openAddTrip} setOpen={setOpenAddTrip} />
       </div>
-      <ul className="flex flex-wrap gap-4">
+      <ul className="flex flex-wrap gap-4 w-full">
         {loading ? Array.from(Array(3).keys()).map((key) => (
           <TripCardSkeleton key={key} />
         )) : plans.length > 0 ? plans.map((plan, key) => (

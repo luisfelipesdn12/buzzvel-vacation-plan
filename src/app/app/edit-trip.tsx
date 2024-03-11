@@ -63,7 +63,7 @@ export function EditTrip({ open, plan, setOpen, afterSubmit }: TripCardActionPro
                     description: e?.response?.data?.error?.message,
                 })
             });
-    }, [afterSubmit, setOpen]);
+    }, [afterSubmit, plan, setOpen]);
 
     return (
         <Drawer open={open} onOpenChange={setOpen}>

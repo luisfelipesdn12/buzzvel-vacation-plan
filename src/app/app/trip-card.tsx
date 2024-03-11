@@ -15,6 +15,7 @@ import { Calendar as CalendarIcon, EllipsisIcon, FileDownIcon, MapPinIcon, Users
 import { useMemo, useState } from "react"
 import { DeleteTrip } from "./delete-trip"
 import { EditTrip } from "./edit-trip"
+import { ManageParticipants } from "./manage-participants"
 
 export interface TripCardActionProps {
     plan: Plan;
@@ -29,6 +30,7 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
 }) {
     const [deleted, setDeleted] = useState<boolean>(false);
     const [openEdit, setOpenEdit] = useState<boolean>(false);
+    const [openParticipants, setOpenParticipants] = useState<boolean>(false);
     const [openDelete, setOpenDelete] = useState<boolean>(false);
     const [updatedPlan, setUpdatedPlan] = useState<Plan>();
 
@@ -44,7 +46,7 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
     const plan = useMemo(() => updatedPlan || initialPlan, [initialPlan, updatedPlan]);
 
     return (
-        <Card className={`text-left w-96 ${deleted ? "hidden" : ""}`}>
+        <Card className={`text-left md:w-96 w-full ${deleted ? "hidden" : ""}`}>
             <CardHeader className="relative">
                 <CardTitle>{plan.title}</CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
@@ -58,11 +60,11 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
                         <EditTrip
                             plan={plan} open={openEdit}
                             setOpen={setOpenEdit} afterSubmit={onEdit}
+                            />
+                        <ManageParticipants
+                            plan={plan} open={openParticipants}
+                            setOpen={setOpenParticipants} afterSubmit={onAfterAction}
                         />
-                        <DropdownMenuItem>
-                            <UsersIcon className="mr-2 h-4 w-4" />
-                            <span>Add participants</span>
-                        </DropdownMenuItem>
                         <DropdownMenuItem>
                             <FileDownIcon className="mr-2 h-4 w-4" />
                             <span>Download PDF</span>
@@ -104,7 +106,7 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
                     )}
                 >
                     <UsersIcon className="mr-2 h-4 w-4" />
-                    {`${plan.participants.length} participants`}
+                    {`${plan.participants.length} participant${plan.participants.length > 1 ? "s" : ""}`}
                 </Button>}
             </CardFooter>
         </Card>

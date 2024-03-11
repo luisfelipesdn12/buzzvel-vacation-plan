@@ -49,8 +49,8 @@ export interface Database {
                     plan_id: string
                     name: string
                     email: string
-                    created_at: Date
-                    updated_at: Date
+                    created_at?: Date
+                    updated_at?: Date
                 },
             },
         }
@@ -73,3 +73,4 @@ export type Plan = Database["public"]["Tables"]["plans"]["Row"];
 export type PlanInsert = Database["public"]["Tables"]["plans"]["Insert"];
 export type PlanUpdate = Database["public"]["Tables"]["plans"]["Insert"];
 export type Participant = Database["public"]["Tables"]["participants"]["Row"];
+export type ParticipantInsert = Database["public"]["Tables"]["participants"]["Insert"];
