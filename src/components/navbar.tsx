@@ -35,6 +35,11 @@ export default function Navbar({ session, gravatar }: SessionProviderPageProps) 
                 pathname: "https://luisf.dev",
                 target: "_blank",
             },
+            {
+                label: "Github",
+                pathname: "https://github.com/luisfelipesdn12/buzzvel-vacation-plan",
+                target: "_blank",
+            },
         ];
 
         if (session) {
