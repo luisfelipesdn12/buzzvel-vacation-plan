@@ -145,7 +145,7 @@ export function ParticipantCard({ participant, afterSubmit }: {
     useEffect(() => {
         getGravatar(participant.email)
             .then(response => response.entry ? response.entry[0] : { thumbnailUrl: undefined })
-            .then(gravatar => setImageUrl(gravatar.thumbnailUrl));
+            .then(gravatar => setImageUrl(gravatar?.thumbnailUrl || ""));
     }, [participant.email]);
 
     const handleDelete = useCallback(async () => {
