@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuid } from "uuid";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     const cookieStore = cookies()
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
