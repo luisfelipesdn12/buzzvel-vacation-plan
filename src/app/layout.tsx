@@ -14,14 +14,22 @@ export const metadata: Metadata = {
         url: "https://luisf.dev"
     }],
     openGraph: {
-        images: [{ url: "/website-card.png" }]
+        type: "website",
+        url: "https://trip.luisf.dev/",
+        title: "Vacation Planner",
+        description: "The perfect planner for your deserved vacation. Set trips, manage dates and more!",
+        images: [{ url: "/website-card.png" }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        images: [{ url: "/website-card.png" }],
     },
 };
 
 export default function RootLayout({
     children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
     return (
         <html lang="en">
