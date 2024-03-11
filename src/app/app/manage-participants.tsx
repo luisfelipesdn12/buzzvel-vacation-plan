@@ -41,6 +41,8 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
     const handleSubmit = useCallback(async (data: z.infer<typeof FormSchema>) => {
         await axios.post("/api/participants", { ...data, plan_id: plan.id })
             .then(() => {
+                form.setValue("name", "");
+                form.setValue("email", "");
                 afterSubmit && afterSubmit();
             })
             .catch(e => {
@@ -51,7 +53,7 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
                     description: e?.response?.data?.error?.message,
                 })
             });
-    }, [afterSubmit, plan.id]);
+    }, [afterSubmit, form, plan.id]);
 
     return (
         <Drawer open={open} onOpenChange={setOpen}>
@@ -73,7 +75,9 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
                         ))}
                     </ScrollArea>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(handleSubmit)} className="mx-auto w-full max-w-sm">
+                        <form onSubmit={e => {
+                            form.handleSubmit(handleSubmit)(e);
+                        }} className="mx-auto w-full max-w-sm">
                             <div className="p-4 py-2 flex gap-2 flex-col pb-0 max-h-80">
                                 <FormField
                                     control={form.control}
@@ -133,7 +137,7 @@ export function ParticipantCard({ participant, afterSubmit }: {
     const [imageUrl, setImageUrl] = useState<string>();
     useEffect(() => {
         getGravatar(participant.email)
-            .then(response => response.entry[0])
+            .then(response => response.entry ? response.entry[0] : { thumbnailUrl: undefined })
             .then(gravatar => setImageUrl(gravatar.thumbnailUrl));
     }, [participant.email]);
 
