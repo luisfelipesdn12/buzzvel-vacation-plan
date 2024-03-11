@@ -1,22 +1,22 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardDescription,
     CardFooter,
     CardHeader,
     CardTitle
-} from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Skeleton } from "@/components/ui/skeleton"
-import { Plan } from "@/lib/database.types"
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
-import { Calendar as CalendarIcon, EllipsisIcon, FileDownIcon, MapPinIcon, UsersIcon } from "lucide-react"
-import { useMemo, useState } from "react"
-import { DeleteTrip } from "./delete-trip"
-import { EditTrip } from "./edit-trip"
-import { ManageParticipants } from "./manage-participants"
-import { PrintTrip } from "./print-trip"
+} from "@/components/ui/card";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Plan } from "@/lib/database.types";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon, EllipsisIcon, FileDownIcon, MapPinIcon, UsersIcon } from "lucide-react";
+import { useMemo, useState } from "react";
+import { DeleteTrip } from "./delete-trip";
+import { EditTrip } from "./edit-trip";
+import { ManageParticipants } from "./manage-participants";
+import { PrintTrip } from "./print-trip";
 
 export interface TripCardActionProps {
     plan: Plan;
@@ -61,7 +61,7 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
                         <EditTrip
                             plan={plan} open={openEdit}
                             setOpen={setOpenEdit} afterSubmit={onEdit}
-                            />
+                        />
                         <ManageParticipants
                             plan={plan} open={openParticipants}
                             setOpen={setOpenParticipants} afterSubmit={onAfterAction}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Database } from "@/lib/database.types";
 import { cn } from "@/lib/utils";
@@ -55,7 +55,7 @@ export default function Navbar({ session, gravatar }: SessionProviderPageProps) 
     const handleSignOut = async () => {
         await supabase.auth.signOut();
         router.refresh();
-    }
+    };
 
     return (
         <header className="sticky top-0 py-1 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -189,7 +189,7 @@ export default function Navbar({ session, gravatar }: SessionProviderPageProps) 
                 </div>
             </div>
         </header>
-    )
+    );
 }
 
 interface MobileLinkProps extends LinkProps {
@@ -211,13 +211,13 @@ function MobileLink({
         <Link
             href={href}
             onClick={() => {
-                router.push(href.toString())
-                onOpenChange?.(false)
+                router.push(href.toString());
+                onOpenChange?.(false);
             }}
             className={cn(className)}
             {...props}
         >
             {children}
         </Link>
-    )
+    );
 }

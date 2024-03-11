@@ -1,8 +1,8 @@
-import { LoaderCircle, TrashIcon, UserRound, UserRoundPlus, UsersIcon } from "lucide-react"
+import { LoaderCircle, TrashIcon, UserRound, UserRoundPlus, UsersIcon } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
     Drawer,
     DrawerClose,
@@ -12,20 +12,20 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger
-} from "@/components/ui/drawer"
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { toast } from "@/components/ui/use-toast"
-import { Participant } from "@/lib/database.types"
-import { getGravatar } from "@/lib/utils"
-import { zodResolver } from "@hookform/resolvers/zod"
-import axios from "axios"
-import { useCallback, useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { TripCardActionProps } from "./trip-card"
+} from "@/components/ui/drawer";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { toast } from "@/components/ui/use-toast";
+import { Participant } from "@/lib/database.types";
+import { getGravatar } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { TripCardActionProps } from "./trip-card";
 
 const FormSchema = z.object({
     name: z.string().max(50),
@@ -51,7 +51,7 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
                     title: "Error adding participant!",
                     variant: "destructive",
                     description: e?.response?.data?.error?.message,
-                })
+                });
             });
     }, [afterSubmit, form, plan.id]);
 
@@ -125,7 +125,7 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
                 </div>
             </DrawerContent>
         </Drawer>
-    )
+    );
 }
 
 export function ParticipantCard({ participant, afterSubmit }: {
@@ -154,7 +154,7 @@ export function ParticipantCard({ participant, afterSubmit }: {
                 title: "Error on delete participant!",
                 variant: "destructive",
                 description: e?.response?.data?.error?.message,
-            })
+            });
         }).finally(() => setLoading(false));
     }, [afterSubmit, participant.id]);
 
@@ -180,5 +180,5 @@ export function ParticipantCard({ participant, afterSubmit }: {
                 </Button>
             </CardHeader>
         </Card>
-    )
+    );
 }

@@ -1,11 +1,11 @@
-import { Database, ParticipantInsert } from '@/lib/database.types';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+import { Database, ParticipantInsert } from "@/lib/database.types";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuid } from "uuid";
 
 export async function POST(request: NextRequest) {
-    const cookieStore = cookies()
+    const cookieStore = cookies();
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-    const cookieStore = cookies()
+    const cookieStore = cookies();
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -61,7 +61,7 @@ export async function DELETE(request: NextRequest) {
     let { error } = await supabase
         .from("participants")
         .delete()
-        .eq('id', id);
+        .eq("id", id);
 
     if (error) {
         return NextResponse.json({ error }, { status: 400 });

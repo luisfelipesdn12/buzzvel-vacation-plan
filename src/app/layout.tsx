@@ -7,27 +7,27 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Vacation Planner",
-  description: "The perfect planner for your deserved vacation. Set trips, manage dates and more!",
+    title: "Vacation Planner",
+    description: "The perfect planner for your deserved vacation. Set trips, manage dates and more!",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={`${inter.className}`}>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                >
+                    {children}
+                    <Toaster />
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }

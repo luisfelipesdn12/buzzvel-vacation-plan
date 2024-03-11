@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { useRouter } from "next/navigation"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import type { Database } from "@/lib/database.types"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import type { Database } from "@/lib/database.types";
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { toast } from "@/components/ui/use-toast"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { LoaderCircle, RectangleEllipsis } from "lucide-react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import Navbar from "@/components/navbar"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { toast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircle, RectangleEllipsis } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import Navbar from "@/components/navbar";
 
 const FormSchema = z.object({
     email: z.string().email(),
@@ -35,7 +35,7 @@ export default function RegisterForm() {
         },
     });
 
-    const router = useRouter()
+    const router = useRouter();
     const supabase = createClientComponentClient<Database>();
 
     const handleSignUp = async (data: z.infer<typeof FormSchema>) => {
@@ -52,9 +52,9 @@ export default function RegisterForm() {
             });
             console.error(response);
         } else {
-            router.refresh()
+            router.refresh();
         }
-    }
+    };
 
     return (
         <>

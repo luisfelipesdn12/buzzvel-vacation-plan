@@ -1,7 +1,7 @@
-import { CalendarIcon, LoaderCircle, MapPinIcon, PlusCircleIcon } from "lucide-react"
+import { CalendarIcon, LoaderCircle, MapPinIcon, PlusCircleIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
     Drawer,
     DrawerClose,
@@ -11,20 +11,20 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from "@/components/ui/drawer"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import { cn } from "@/lib/utils"
-import { zodResolver } from "@hookform/resolvers/zod"
-import axios from "axios"
-import { format } from "date-fns"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { useCallback, useEffect, useState } from "react"
+} from "@/components/ui/drawer";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useCallback, useEffect, useState } from "react";
 
 const FormSchema = z.object({
     title: z.string().max(20),
@@ -61,7 +61,7 @@ export function AddTrip({open, setOpen}: {
                     title: "Error creating trip!",
                     variant: "destructive",
                     description: e?.response?.data?.error?.message,
-                })
+                });
             });
     }, [setOpen]);
 
@@ -186,5 +186,5 @@ export function AddTrip({open, setOpen}: {
                 </Form>
             </DrawerContent>
         </Drawer>
-    )
+    );
 }

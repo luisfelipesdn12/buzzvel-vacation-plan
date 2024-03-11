@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { SessionProviderPageProps } from "@/components/SessionProvider";
 import Navbar from "@/components/navbar";
@@ -12,7 +12,7 @@ export default function App(props: SessionProviderPageProps) {
         props.gravatar?.displayName ?
             `Hello, ${props.gravatar?.displayName}!` :
             "Hello!",
-        [props.gravatar?.displayName]);
+    [props.gravatar?.displayName]);
 
     return (
         <>
@@ -25,7 +25,7 @@ export default function App(props: SessionProviderPageProps) {
                             {salute}
                         </h1>
                         <p className="text-muted-foreground text-center md:text-right">
-                            {`"We could vacay, there's places to go"`}
+                            {"\"We could vacay, there's places to go\""}
                             <br />
                             <p className="text-sm">
                                 — Frank Ocean in White Ferrari

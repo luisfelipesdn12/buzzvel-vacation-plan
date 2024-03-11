@@ -1,11 +1,11 @@
-import { Database, Participant, Plan, PlanInsert, PlanUpdate } from '@/lib/database.types';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { NextRequest, NextResponse } from 'next/server';
+import { Database, Participant, Plan, PlanInsert, PlanUpdate } from "@/lib/database.types";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuid } from "uuid";
 
 export async function GET(request: NextRequest) {
-    const cookieStore = cookies()
+    const cookieStore = cookies();
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     } = await supabase
         .from("plans")
         .select()
-        .eq('user_id', user.id);
+        .eq("user_id", user.id);
 
     if (!plans) plans = [];
 
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
         } = await supabase
             .from("participants")
             .select()
-            .eq('plan_id', plans[i].id);
+            .eq("plan_id", plans[i].id);
 
         plans[i].participants = participants || [];
     }
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-    const cookieStore = cookies()
+    const cookieStore = cookies();
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-    const cookieStore = cookies()
+    const cookieStore = cookies();
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -103,8 +103,8 @@ export async function PUT(request: NextRequest) {
             date: body.date,
             location: body.location,
         })
-        .eq('id', body.id)
-        .eq('user_id', user.id)
+        .eq("id", body.id)
+        .eq("user_id", user.id)
         .select();
 
     if (error) {
@@ -115,7 +115,7 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-    const cookieStore = cookies()
+    const cookieStore = cookies();
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore });
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -139,8 +139,8 @@ export async function DELETE(request: NextRequest) {
     let { error } = await supabase
         .from("plans")
         .delete()
-        .eq('id', id)
-        .eq('user_id', user.id);
+        .eq("id", id)
+        .eq("user_id", user.id);
 
     if (error) {
         return NextResponse.json({ error }, { status: 400 });

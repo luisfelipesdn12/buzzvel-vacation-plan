@@ -1,7 +1,7 @@
-import { CalendarIcon, EditIcon, LoaderCircle, MapPinIcon } from "lucide-react"
+import { CalendarIcon, EditIcon, LoaderCircle, MapPinIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
     Drawer,
     DrawerClose,
@@ -11,22 +11,22 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from "@/components/ui/drawer"
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import { cn } from "@/lib/utils"
-import { zodResolver } from "@hookform/resolvers/zod"
-import axios from "axios"
-import { format } from "date-fns"
-import { useCallback } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { TripCardActionProps } from "./trip-card"
+} from "@/components/ui/drawer";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { format } from "date-fns";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { TripCardActionProps } from "./trip-card";
 
 const FormSchema = z.object({
     title: z.string().max(20),
@@ -61,7 +61,7 @@ export function EditTrip({ open, plan, setOpen, afterSubmit }: TripCardActionPro
                     title: "Error updating trip!",
                     variant: "destructive",
                     description: e?.response?.data?.error?.message,
-                })
+                });
             });
     }, [afterSubmit, plan, setOpen]);
 
@@ -185,5 +185,5 @@ export function EditTrip({ open, plan, setOpen, afterSubmit }: TripCardActionPro
                 </Form>
             </DrawerContent>
         </Drawer>
-    )
+    );
 }

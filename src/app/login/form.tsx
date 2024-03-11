@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { useRouter } from "next/navigation"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import type { Database } from "@/lib/database.types"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import type { Database } from "@/lib/database.types";
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { toast } from "@/components/ui/use-toast"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { LogIn, LoaderCircle } from "lucide-react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import Navbar from "@/components/navbar"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { toast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LogIn, LoaderCircle } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import Navbar from "@/components/navbar";
 
 const FormSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8, {
         message: "Password must be at least 8 characters."
     }),
-})
+});
 
 export default function LoginForm() {
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -31,7 +31,7 @@ export default function LoginForm() {
         },
     });
 
-    const router = useRouter()
+    const router = useRouter();
     const supabase = createClientComponentClient<Database>();
 
     const handleSignIn = async (data: z.infer<typeof FormSchema>) => {
@@ -48,9 +48,9 @@ export default function LoginForm() {
             });
             console.error(response);
         } else {
-            router.refresh()
+            router.refresh();
         }
-    }
+    };
 
     return (
         <>
