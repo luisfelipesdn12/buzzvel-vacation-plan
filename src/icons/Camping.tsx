@@ -1,5 +1,8 @@
 import React, { SVGProps } from "react";
 
+/**
+ * SVG Illustration of a camping.
+ */
 function Camping(props: SVGProps<SVGSVGElement>) {
     return (
         <svg

@@ -22,6 +22,10 @@ const FormSchema = z.object({
     }),
 });
 
+/**
+ * The form for login in the platform. Uses `zod` and `useForm`
+ * to handle the data. Fetch the valid user data in Supabase.
+ */
 export default function LoginForm() {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),

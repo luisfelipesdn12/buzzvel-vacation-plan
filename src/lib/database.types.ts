@@ -1,4 +1,6 @@
-
+/**
+* `Database` represents a database structure. Following Supabase documentation
+*/
 export interface Database {
     public: {
         Tables: {

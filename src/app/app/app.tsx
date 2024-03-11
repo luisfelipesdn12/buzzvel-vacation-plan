@@ -7,6 +7,9 @@ import Trips from "./trips";
 import { Separator } from "@/components/ui/separator";
 import Camping from "@/icons/Camping";
 
+/**
+ * The logged app view.
+ */
 export default function App(props: SessionProviderPageProps) {
     const salute = useMemo(() =>
         props.gravatar?.displayName ?

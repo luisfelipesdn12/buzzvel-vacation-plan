@@ -3,6 +3,9 @@ import { generatePlanPdf } from "@/lib/utils";
 import { FileDownIcon } from "lucide-react";
 import { TripCardActionProps } from "./trip-card";
 
+/**
+ * Button to print plan data.
+ */
 export function PrintTrip({ plan }: Pick<TripCardActionProps, "plan">) {
     return (
         <DropdownMenuItem onClick={() => generatePlanPdf(plan)}>

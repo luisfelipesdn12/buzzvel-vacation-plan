@@ -1,5 +1,8 @@
 import React, { SVGProps } from "react";
 
+/**
+ * SVG Illustration of a pilot.
+ */
 function Pilot(props: SVGProps<SVGSVGElement>) {
     return (
         <svg

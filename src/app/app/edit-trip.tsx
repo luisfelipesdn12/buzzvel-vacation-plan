@@ -39,6 +39,10 @@ const FormSchema = z.object({
     })).optional(),
 });
 
+/**
+ * Option to edit the plan. Opens a mobile-friedly
+ * interface to view and edit the data.
+ */
 export function EditTrip({ open, plan, setOpen, afterSubmit }: TripCardActionProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),

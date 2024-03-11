@@ -16,6 +16,11 @@ interface SessionProviderProps {
     page: React.FC<SessionProviderPageProps>;
 }
 
+/**
+ * SessionProvider is used to perform server-side operations
+ * and provide the user data if it is logged in. Also, fetches
+ * public data from Gravatar using user email.
+ */
 export default async function SessionProvider({
     page: PageComponent,
     redirectIfSession,

@@ -17,6 +17,10 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { TripCardActionProps } from "./trip-card";
 
+/**
+ * Option to edit the plan. Opens a mobile-friedly
+ * interface to confirm the operation.
+ */
 export function DeleteTrip({ open, plan, setOpen, afterSubmit }: TripCardActionProps) {
     const [loading, setLoading] = useState<boolean>(false);
 

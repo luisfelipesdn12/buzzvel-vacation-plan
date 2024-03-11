@@ -26,6 +26,10 @@ const FormSchema = z.object({
     path: ["confirmPassword"],
 });
 
+/**
+ * The form for register in the platform. Uses `zod` and `useForm`
+ * to handle the data. Creates a new user in Supabase Auth Server.
+ */
 export default function RegisterForm() {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),

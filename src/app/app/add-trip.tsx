@@ -37,6 +37,10 @@ const FormSchema = z.object({
     })).optional(),
 });
 
+/**
+ * Option to add a new plan. Opens a mobile-friedly
+ * interface to insert the data.
+ */
 export function AddTrip({open, setOpen}: {
     open: boolean;
     setOpen: (v: boolean) => void;

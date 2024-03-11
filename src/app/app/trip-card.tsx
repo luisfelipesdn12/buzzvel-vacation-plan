@@ -25,6 +25,9 @@ export interface TripCardActionProps {
     afterSubmit?: (data?: Plan) => void;
 }
 
+/**
+ * Card with plan data.
+ */
 export default function TripCard({ plan: initialPlan, onAfterAction }: {
     plan: Plan,
     onAfterAction: () => void,
@@ -111,6 +114,9 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
     );
 }
 
+/**
+ * Card based on the real one, but for loading pourposes.
+ */
 export function TripCardSkeleton() {
     return (
         <Card className="text-left w-96">

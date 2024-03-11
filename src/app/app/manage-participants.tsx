@@ -32,6 +32,10 @@ const FormSchema = z.object({
     email: z.string().email(),
 });
 
+/**
+ * Option to manage plan participants. Opens a mobile-friedly
+ * interface to do CRUD operation in participants.
+ */
 export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCardActionProps) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -128,6 +132,9 @@ export function ManageParticipants({ open, plan, setOpen, afterSubmit }: TripCar
     );
 }
 
+/**
+ * card with participant data and a delete button.
+ */
 export function ParticipantCard({ participant, afterSubmit }: {
     participant: Participant;
     afterSubmit: TripCardActionProps["afterSubmit"];

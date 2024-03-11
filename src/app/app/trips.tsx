@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { AddTrip } from "./add-trip";
 import TripCard, { TripCardSkeleton } from "./trip-card";
 
+/**
+ * List of user trips.
+ */
 export default function Trips(props: SessionProviderPageProps) {
     const [loading, setLoading] = useState<boolean>(true);
     const [plans, setPlans] = useState<Plan[]>([]);

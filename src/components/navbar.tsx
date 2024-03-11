@@ -21,6 +21,11 @@ interface Link {
     target?: string;
 }
 
+/**
+ * The navbar for all the pages.
+ * Get the user session to show or hide navigation options,
+ * and also to show profile information using gravatar.
+ */
 export default function Navbar({ session, gravatar }: SessionProviderPageProps) {
     const pathname = usePathname();
     const router = useRouter();
