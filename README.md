@@ -1,8 +1,8 @@
 # buzzvel-vacation-plan
 
-A web platform to manage holyday plans.
+A web platform to manage holyday plans. Available now at [trip.luisf.dev](https://trip.luisf.dev/)
 
-![lala](./public/website-card.png)
+![Website Card](./public/website-card.png)
 
 ## 🧮 Features
 
@@ -20,6 +20,24 @@ A web platform to manage holyday plans.
 - **Supabase** as Postgres databse and Auth Server
 - **Next.js** for web development (React, Node.js, Typescript)
 - **Vercel** for hosting and CI/CD
+- **Shadcn** and **Tailwind** as for styling and components
+
+## ↗️ Running
+
+1. Install dependencies with `yarn`
+2. Create a [Supabase](https://supabase.com/) project
+3. Create a `.env` file based on `.env.example` with the project credentials
+4. On the project dashboard or using the [Supabase](https://supabase.com/) CLI, run the `src/database/seed.sql` script
+5. Start the project with `yarn dev`
+
+## 🧱 Structure
+
+- `src/app` - All the routes using App Router syntax from up to date Next.js
+- `src/components` - The components used in a greater scope
+- `src/components/ui` - Shadcn components installed individually
+- `src/database` - Stores `seed.sql` to startup the SQL database
+- `src/icons` - SVG components of illustrations
+- `src/lib` - Utils and types
 
 ## 🖼️ Illustrations
 
