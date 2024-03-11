@@ -149,4 +149,3 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ deleted: true });
 }
 
-export default GET;
