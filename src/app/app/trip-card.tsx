@@ -16,6 +16,7 @@ import { useMemo, useState } from "react"
 import { DeleteTrip } from "./delete-trip"
 import { EditTrip } from "./edit-trip"
 import { ManageParticipants } from "./manage-participants"
+import { PrintTrip } from "./print-trip"
 
 export interface TripCardActionProps {
     plan: Plan;
@@ -65,10 +66,7 @@ export default function TripCard({ plan: initialPlan, onAfterAction }: {
                             plan={plan} open={openParticipants}
                             setOpen={setOpenParticipants} afterSubmit={onAfterAction}
                         />
-                        <DropdownMenuItem>
-                            <FileDownIcon className="mr-2 h-4 w-4" />
-                            <span>Download PDF</span>
-                        </DropdownMenuItem>
+                        <PrintTrip plan={plan} />
                         <DropdownMenuSeparator />
                         <DeleteTrip
                             plan={plan} open={openDelete}
