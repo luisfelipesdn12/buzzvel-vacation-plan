@@ -42,10 +42,7 @@ export async function getGravatar(email: string): Promise<{
 
   return await axios.get(`https://gravatar.com/${hash}.json`)
     .then(data => data.data)
-    .catch((e) => {
-      console.error(e);
-      return {};
-    });
+    .catch((e) => ({ entry: [], error: e }));
 }
 
 export function generatePlanPdf(plan: Plan) {
