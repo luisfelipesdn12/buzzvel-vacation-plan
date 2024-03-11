@@ -1,6 +1,6 @@
 # buzzvel-vacation-plan
 
-A web platform to manage holyday plans. Available now at [trip.luisf.dev](https://trip.luisf.dev/)
+A web platform to manage holiday plans. Available now at [trip.luisf.dev](https://trip.luisf.dev/)
 
 ![Website Card](./public/website-card.png)
 
@@ -9,7 +9,7 @@ A web platform to manage holyday plans. Available now at [trip.luisf.dev](https:
 - 📅 Manage your plans in a beautiful card view
 - 🫂 Add participants to each trip
 - 🆔 User register and login with authenticated routes 
-- 🖼️ Retriave profile picture and display name from Gravatar
+- 🖼️ Retrieve profile picture and display name from Gravatar
 - 🌐 Deploy to the web on each Git update
 - 🔗 Custom domain configuration
 - 🛑 Careful errors handling with good UX
@@ -18,10 +18,10 @@ A web platform to manage holyday plans. Available now at [trip.luisf.dev](https:
 
 ## 🧑‍💻 Tech
 
-- **Supabase** as Postgres databse and Auth Server
+- **Supabase** as Postgres database and Auth Server
 - **Next.js** for web development (React, Node.js, Typescript)
 - **Vercel** for hosting and CI/CD
-- **Shadcn** and **Tailwind** as for styling and components
+- **Shadcn** and **Tailwind** for styling and components
 
 ## ↗️ Running
 
@@ -33,10 +33,10 @@ A web platform to manage holyday plans. Available now at [trip.luisf.dev](https:
 
 ## 🧱 Structure
 
-- `src/app` - All the routes using App Router syntax from up to date Next.js
+- `src/app` - All the routes using App Router syntax from up-to-date Next.js
 - `src/components` - The components used in a greater scope
 - `src/components/ui` - Shadcn components installed individually
-- `src/database` - Stores `seed.sql` to startup the SQL database
+- `src/database` - Stores `seed.sql` to start up the SQL database
 - `src/icons` - SVG components of illustrations
 - `src/lib` - Utils and types
 
