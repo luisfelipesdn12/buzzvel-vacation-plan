@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
@@ -40,6 +41,7 @@ export default function RootLayout({
                     enableSystem
                 >
                     {children}
+                    <Analytics />
                     <Toaster />
                 </ThemeProvider>
             </body>
